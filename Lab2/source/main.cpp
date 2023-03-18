@@ -2,10 +2,6 @@
 #include <opencv2/opencv.hpp>
 #include <string>
 #include <vector>
-#include <chrono>
-#include <thread>
-
-using namespace std::chrono_literals;
 
 static std::string haar_cascades_path = "../../opencv/data/haarcascades/";
 
@@ -141,10 +137,9 @@ int main()
             break;
     }
 
+    cap.release();
 
     cv::waitKey();
-
-    cap.release();
     cv::destroyAllWindows();
 
     return 0;
