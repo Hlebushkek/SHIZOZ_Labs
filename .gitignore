@@ -27,9 +27,19 @@
 *.out
 *.app
 
+# Labs
+*/build
+
 # OpenCV
 build_opencv
-*/build
+
+# Dlib
+build_dlib
 
 #VSCode
 .vscode
+
+#Lab4
+Lab4/resources/dataset/*
+Lab4/resources/examples/*
+Lab4/resources/models/*
