@@ -117,15 +117,12 @@ int main()
     {
         cap.read(frame);
 
-        // if (!frame.empty())
-        // {
-            process_image(frame);
-            cv::imshow("Video", frame);
+        process_image(frame);
+        cv::imshow("Video", frame);
 
-            char c = (char)cv::waitKey(250);
-            if (c == 27)
-                break;
-        // }
+        char c = (char)cv::waitKey(250);
+        if (c == 27)
+            break;
     }
 
     cv::waitKey();

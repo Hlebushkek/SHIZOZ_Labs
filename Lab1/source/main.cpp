@@ -51,9 +51,9 @@ int main()
 
     //Blur
     cv::Mat img_blurred, img_stacked;
-    // cv::GaussianBlur(img_base, img_blurred, cv::Size(121, 121), 0);
-    // cv::vconcat(img_base, img_blurred, img_stacked);
-    // cv::imshow("Blurred", img_stacked);
+    cv::GaussianBlur(img_base, img_blurred, cv::Size(121, 121), 0);
+    cv::vconcat(img_base, img_blurred, img_stacked);
+    cv::imshow("Blurred", img_stacked);
 
     //Rectangle
     cv::Mat img_rect;

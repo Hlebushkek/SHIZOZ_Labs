@@ -58,7 +58,7 @@ int main()
     auto detector = cv::HOGDescriptor::getDefaultPeopleDetector();
     hog.setSVMDetector(detector);
 
-    img_base = cv::imread("../resources/photo3.jpg");
+    img_base = cv::imread("../resources/photo2.jpeg");
     scaling_factor = 0.2f;
 
     cv::resize(img_base, img_resized, cv::Size(0, 0), scaling_factor, scaling_factor, cv::INTER_AREA);
@@ -69,10 +69,10 @@ int main()
     std::vector<cv::Rect> people_rects;
     hog.detectMultiScale(img_gs, people_rects, 0, cv::Size(8, 8), cv::Size(30, 30));
 
-    for (auto const& rect : people_rects) {
-        cv::rectangle(img_final, rect, cv::Scalar(0, 0, 255), 2);
-    }
+    for (auto const& rect : people_rects)
+        cv::rectangle(img_final, rect, cv::Scalar(0, 255 % rect.x, 255 % rect.height), 2);
 
+    std::cout << "There is " << people_rects.size() << " people on photo" << std::endl;
     cv::imshow("PeopleDetection", img_final);
 
     //2 Video face detection
@@ -92,11 +92,7 @@ int main()
         cv::resize(frame, frame_scaled, cv::Size(640, 360));
         cv::cvtColor(frame_scaled, frame_gs, cv::COLOR_BGR2GRAY);
 
-        hog.detectMultiScale(frame_gs, people_rects, 0, cv::Size(8, 8));
-        for (auto const& rect : people_rects)
-            cv::rectangle(frame_scaled, rect, cv::Scalar(0, 255, 0), 2);
-
-        face_cascade.detectMultiScale(frame_gs, face_rects);
+        face_cascade.detectMultiScale(frame_gs, face_rects, 1.5);
         for (auto const& rect : face_rects)
             cv::rectangle(frame_scaled, rect, cv::Scalar(0, 0, 255), 2);
 
@@ -108,6 +104,7 @@ int main()
     }
 
     webcam_cap.release();
+
     //3 walking people + faces video detection
     cv::VideoCapture cap("../resources/video1.mp4");
 
